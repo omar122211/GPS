@@ -2,7 +2,7 @@
 
 Click anywhere on an aerial image and get the real-world GPS coordinates of that spot.
 
-**Live demo:** https://microbe233.github.io/GPS/
+**Live demo:** https://omar122211.github.io/GPS/
 
 ![Screenshot of the Coordinate Transformation Tool](docs/screenshot.jpg)
 
