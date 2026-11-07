@@ -3,186 +3,114 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Advanced Coordinate Transformation Tool</title>
+    <title>Coordinate Transformation Tool — Pixel to GPS</title>
+    <meta name="description" content="Click anywhere on an aerial image and get its real-world GPS coordinates, calculated from the image's corner coordinates." />
+    <meta name="theme-color" content="#0b0f14" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'" />
+    <link rel="icon" href="./public/images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./public/style/index.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <h1>🗺️ Advanced Coordinate Transformation Tool</h1>
-        <p>
-          Convert pixel coordinates to GPS coordinates with customizable
-          parameters
-        </p>
-      </div>
-
-      <div class="main-content">
-        <div class="image-section">
-          <h3>📷 Interactive Aerial Image</h3>
-          <div class="image-container">
-            <div class="aerial-image" id="aerialImage">
-              <!-- Reference Points will be added dynamically -->
-            </div>
-          </div>
-          <p style="text-align: center; color: #666; margin-top: 10px">
-            <em>Click anywhere on the image to calculate GPS coordinates</em>
-          </p>
-        </div>
-
-        <div class="controls-section">
-          <div class="control-group">
-            <h3>
-              <span class="status-indicator"></span>
-              Image Dimensions
-            </h3>
-            <div class="dimensions-input">
-              <div class="input-group">
-                <label for="imageWidth">Width (px)</label>
-                <input
-                  type="number"
-                  id="imageWidth"
-                  value="363"
-                  min="100"
-                  max="2000"
-                />
-              </div>
-              <div class="input-group">
-                <label for="imageHeight">Height (px)</label>
-                <input
-                  type="number"
-                  id="imageHeight"
-                  value="673"
-                  min="100"
-                  max="2000"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <h3>📍 Corner Coordinates</h3>
-
-            <h4 style="color: #e74c3c; margin: 15px 0 10px 0">
-              Top-Left Corner
-            </h4>
-            <div class="input-row">
-              <div class="input-group">
-                <label>Latitude</label>
-                <input
-                  type="number"
-                  id="topLeftLat"
-                  value="40.7589"
-                  step="0.000001"
-                />
-              </div>
-              <div class="input-group">
-                <label>Longitude</label>
-                <input
-                  type="number"
-                  id="topLeftLng"
-                  value="-73.9851"
-                  step="0.000001"
-                />
-              </div>
-            </div>
-
-            <h4 style="color: #e74c3c; margin: 15px 0 10px 0">
-              Top-Right Corner
-            </h4>
-            <div class="input-row">
-              <div class="input-group">
-                <label>Latitude</label>
-                <input
-                  type="number"
-                  id="topRightLat"
-                  value="40.7589"
-                  step="0.000001"
-                />
-              </div>
-              <div class="input-group">
-                <label>Longitude</label>
-                <input
-                  type="number"
-                  id="topRightLng"
-                  value="-73.9841"
-                  step="0.000001"
-                />
-              </div>
-            </div>
-
-            <h4 style="color: #e74c3c; margin: 15px 0 10px 0">
-              Bottom-Left Corner
-            </h4>
-            <div class="input-row">
-              <div class="input-group">
-                <label>Latitude</label>
-                <input
-                  type="number"
-                  id="bottomLeftLat"
-                  value="40.7579"
-                  step="0.000001"
-                />
-              </div>
-              <div class="input-group">
-                <label>Longitude</label>
-                <input
-                  type="number"
-                  id="bottomLeftLng"
-                  value="-73.9851"
-                  step="0.000001"
-                />
-              </div>
-            </div>
-
-            <h4 style="color: #e74c3c; margin: 15px 0 10px 0">
-              Bottom-Right Corner
-            </h4>
-            <div class="input-row">
-              <div class="input-group">
-                <label>Latitude</label>
-                <input
-                  type="number"
-                  id="bottomRightLat"
-                  value="40.7579"
-                  step="0.000001"
-                />
-              </div>
-              <div class="input-group">
-                <label>Longitude</label>
-                <input
-                  type="number"
-                  id="bottomRightLng"
-                  value="-73.9841"
-                  step="0.000001"
-                />
-              </div>
-            </div>
-
-            <button class="update-btn" onclick="updateTransformation()">
-              🔄 Update Transformation
-            </button>
-          </div>
-
-          <div class="result-panel" id="resultPanel">
-            <h4>🎯 Click on the image to calculate coordinates</h4>
-            <div class="coordinates" id="coordinates">Waiting for click...</div>
-            <div class="pixel-info" id="pixelInfo">
-              Pixel position will appear here
-            </div>
-          </div>
-
-          <div class="calculation-panel">
-            <h4>📐 Live Calculations</h4>
-            <div class="formula" id="scaleFactors">
-              Scale factors will be calculated here...
-            </div>
-            <div class="formula" id="transformationFormula">
-              Click on image to see transformation...
-            </div>
-          </div>
+    <header class="topbar">
+      <div class="brand">
+        <img class="logo" src="./public/images/favicon.svg" alt="" />
+        <div>
+          <h1>Coordinate Transformation Tool</h1>
+          <p>Turn any pixel on an aerial image into real-world GPS coordinates.</p>
         </div>
       </div>
-    </div>
+      <a class="btn ghost small" href="https://github.com/microbe233/GPS" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+    </header>
+
+    <main class="layout">
+      <!-- ============ MAP ============ -->
+      <section class="card map-card">
+        <div class="card-head">
+          <h2>Aerial image</h2>
+          <span class="chip">Times Square, New York</span>
+        </div>
+
+        <div class="map-stage">
+          <div class="aerial-image" id="aerialImage" role="img" aria-label="Aerial photo of Times Square. Click to get GPS coordinates.">
+            <div class="xh xh-h" id="xhH"></div>
+            <div class="xh xh-v" id="xhV"></div>
+            <div class="hover-readout mono" id="hoverReadout"></div>
+          </div>
+        </div>
+
+        <div class="map-foot">
+          <p class="hint"><span class="dot"></span> Hover to preview &middot; click to drop a pin</p>
+          <p class="credit">Imagery: NYS ITS Geospatial Services (NYS Statewide Digital Orthoimagery Program)</p>
+        </div>
+      </section>
+
+      <!-- ============ SIDEBAR ============ -->
+      <aside class="sidebar">
+        <section class="card result" id="resultPanel" aria-live="polite">
+          <p class="eyebrow">Selected point</p>
+          <div class="coordinates mono" id="coordinates">Click the image</div>
+          <div class="pixel-info mono" id="pixelInfo">No point selected yet</div>
+          <div class="actions">
+            <button class="btn" id="copyBtn" type="button" disabled>Copy</button>
+            <a class="btn ghost" id="mapsLink" target="_blank" rel="noopener noreferrer" aria-disabled="true">Open in Google Maps</a>
+          </div>
+        </section>
+
+        <section class="card">
+          <h3>Image size</h3>
+          <div class="grid-2">
+            <label class="field">Width (px)
+              <input type="number" id="imageWidth" value="420" min="100" max="2000" />
+            </label>
+            <label class="field">Height (px)
+              <input type="number" id="imageHeight" value="555" min="100" max="2000" />
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h3>Corner coordinates</h3>
+          <div class="corners">
+            <fieldset class="corner">
+              <legend><span class="tag">TL</span> Top-left</legend>
+              <label class="field">Latitude <input type="number" id="topLeftLat" value="40.7589" step="0.000001" /></label>
+              <label class="field">Longitude <input type="number" id="topLeftLng" value="-73.9851" step="0.000001" /></label>
+            </fieldset>
+            <fieldset class="corner">
+              <legend><span class="tag">TR</span> Top-right</legend>
+              <label class="field">Latitude <input type="number" id="topRightLat" value="40.7589" step="0.000001" /></label>
+              <label class="field">Longitude <input type="number" id="topRightLng" value="-73.9841" step="0.000001" /></label>
+            </fieldset>
+            <fieldset class="corner">
+              <legend><span class="tag">BL</span> Bottom-left</legend>
+              <label class="field">Latitude <input type="number" id="bottomLeftLat" value="40.7579" step="0.000001" /></label>
+              <label class="field">Longitude <input type="number" id="bottomLeftLng" value="-73.9851" step="0.000001" /></label>
+            </fieldset>
+            <fieldset class="corner">
+              <legend><span class="tag">BR</span> Bottom-right</legend>
+              <label class="field">Latitude <input type="number" id="bottomRightLat" value="40.7579" step="0.000001" /></label>
+              <label class="field">Longitude <input type="number" id="bottomRightLng" value="-73.9841" step="0.000001" /></label>
+            </fieldset>
+          </div>
+          <p class="error" id="configError" hidden></p>
+          <button class="btn primary wide" id="updateBtn" type="button">Update transformation</button>
+        </section>
+
+        <details class="card calc" open>
+          <summary><h3>Live calculations</h3></summary>
+          <div class="formula mono" id="scaleFactors">Scale factors will appear here…</div>
+          <div class="formula mono" id="transformationFormula">Click on the image to see the transformation…</div>
+        </details>
+
+        <section class="card">
+          <h3>Recent points</h3>
+          <ol class="history" id="history"><li class="empty">Your clicks will appear here</li></ol>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="footer">Built by Omar Mostafa &middot; pixel &rarr; GPS with linear interpolation between corner coordinates</footer>
+
     <script src="./public/javascript/index.js"></script>
   </body>
 </html>
